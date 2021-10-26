@@ -8,7 +8,7 @@ const compression = require('compression');
 
 
 
-const indexRouter = require('./routes/roobodyParsert');
+const indexRouter = require('./routes/root');
 const contestantRouter = require('./routes/contestant');
 
 const app = express();
@@ -22,6 +22,6 @@ app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/contestant', contestantRouter);
+app.use('/contestants', contestantRouter);
 
 module.exports = app;
