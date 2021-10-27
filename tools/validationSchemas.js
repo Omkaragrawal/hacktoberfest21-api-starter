@@ -107,6 +107,89 @@ const getContestantViaId = checkSchema({
         trim: true
     }
 });
+
+const patchContestantId = checkSchema({
+    "id": {
+        in: "params",
+        notEmpty: {
+            errorMessage: "ID should be provided.",
+        },
+        isString: {
+            errorMessage: "ID should be a string."
+        },
+        isUUID: {
+            errorMessage: "ID should be a UUID."
+        },
+        trim: true
+    },
+    "name": {
+        in: ["body"],
+        optional: true,
+        notEmpty: {
+            "errorMessage": "Name cannot be empty."
+        },
+        isString: {
+            "errorMessage": "Name should be a string."
+        },
+        isAlpha: {
+            "errorMessage": "Name cannot contain anything except for Alphabets and space."
+        },
+        trim: true,
+    },
+    "costumeTitle": {
+        in: ["body"],
+        optional: true,
+        notEmpty: {
+            "errorMessage": "Costume title cannot be empty."
+        },
+        isString: {
+            "errorMessage": "Costume title should be a string."
+        },
+        trim: true
+    },
+    "costumeImgUrl": {
+        in: ["body"],
+        optional: true,
+        notEmpty: {
+            "errorMessage": "Costume Image URL cannot be empty."
+        },
+        isString: {
+            "errorMessage": "Costume Image URL should be a string."
+        },
+        isURL: {
+            "errorMessage": "Costume Image URL should be a URL, please check the URL again."
+        },
+        trim: true,
+    },
+    "city": {
+        in: ["body"],
+        optional: true,
+        notEmpty: {
+            "errorMessage": "City cannot be empty."
+        },
+        isString: {
+            "errorMessage": "City should be a string."
+        },
+        isAlpha: {
+            "errorMessage": "City cannot contain anything except for Alphabets and space."
+        },
+        trim: true,
+    },
+    "country": {
+        in: ["body"],
+        optional: true,
+        notEmpty: {
+            "errorMessage": "Country cannot be empty."
+        },
+        isString: {
+            "errorMessage": "Country should be a string."
+        },
+        isAlpha: {
+            "errorMessage": "Country cannot contain anything except for Alphabets and space."
+        },
+        trim: true,
+    }
+});
 const globalValidator = (req, res, next) => {
     const results = validationResult(req);
     if (!results.isEmpty()) {
@@ -124,5 +207,6 @@ const globalValidator = (req, res, next) => {
 module.exports = {
     postRootContestant,
     getContestantViaId,
+    patchContestantId,
     globalValidator
 }

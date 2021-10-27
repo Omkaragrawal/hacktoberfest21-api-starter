@@ -45,7 +45,52 @@ const enterNewParticipant = ({
 };
 
 const updateContestant = () => {
+    
+};
 
+const upVoteContestant = async id => {
+    if (!!!id) return Promise.reject("Invalid ID");
+    return db.query(queries.upVoteContestant, [id]);
+};
+
+const deleteContestant = async id => {
+    if (!!!id) return Promise.reject("Invalid ID");
+    return db.query(queries.deleteContestant, [id]);
+};
+
+const updateContestant = async ({id, name, costumeTitle, costumeImgUrl, city, country}) => {
+    let params = [id];
+    let constructedQuery = queries.UpdateContestant.queryStart;
+    let counter = 1;
+    if(name) {
+        counter += 1;
+        constructedQuery += queries.UpdateContestant.name + `$${counter},`;
+        params.push(name);
+    }
+    if(costumeTitle) {
+        counter += 1;
+        constructedQuery += queries.UpdateContestant.costumeTitle + `$${counter},`;
+        params.push(costumeTitle);
+    }
+    if(costumeImgUrl) {
+        counter += 1;
+        constructedQuery += queries.UpdateContestant.costumeImgUrl + `$${counter},`;
+        params.push(costumeImgUrl);
+    }
+    if(city) {
+        counter += 1;
+        constructedQuery += queries.UpdateContestant.city + `$${counter},`;
+        params.push(city);
+    }
+    if(country) {
+        counter += 1;
+        constructedQuery += queries.UpdateContestant.country + `$${counter}`;
+        params.push(country);
+    }
+    if(constructedQuery.endsWith(",")) {
+        constructedQuery = constructedQuery.substring(0, constructedQuery.length - 1);
+    }
+    return db.query(constructedQuery + queries.UpdateContestant.queryEnd, params);
 };
 
 const initializeDatabase = async () => {
@@ -116,10 +161,6 @@ const initializeDatabase = async () => {
     }
 };
 
-const deleteContestant = async id => {
-    if (!!!id) return Promise.reject("Invalid ID");
-    return db.query(queries.deleteContestant, [id]);
-}
 module.exports = {
     db,
     closeDB,
@@ -128,5 +169,6 @@ module.exports = {
     getParticipant,
     enterNewParticipant,
     updateContestant,
-    deleteContestant
+    deleteContestant,
+    upVoteContestant
 };

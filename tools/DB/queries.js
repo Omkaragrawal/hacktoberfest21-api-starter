@@ -31,11 +31,24 @@ const enterNewParticipant = `Insert into contestants (id, name, costume_title, c
 
 const deleteContestant = `Update contestants set enabled = false where id = $1 and enabled = true;`;
 
+const upVoteContestant = `Update contestants set votes = votes + 1 where id = $1 and enabled = true returning votes;`;
+
+const UpdateContestant = {
+	"queryStart": "Update contestants set ",
+	"queryEnd": " where id = $1 and enabled = true;",
+	"name": "name = ", 
+	"costumeTitle": "costume_title = ", 
+	"costumeImgUrl": "costume_img_url = ", 
+	"city": "city = ", 
+	"country": "country = "
+};
 
 module.exports = {
     createTable,
     getAllContestants,
     getSelectContestant,
     enterNewParticipant,
-	deleteContestant
+	deleteContestant,
+	upVoteContestant,
+	UpdateContestant
 };
