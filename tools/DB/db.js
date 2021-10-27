@@ -115,12 +115,18 @@ const initializeDatabase = async () => {
         return Promise.reject(error);
     }
 };
+
+const deleteContestant = async id => {
+    if (!!!id) return Promise.reject("Invalid ID");
+    return db.query(queries.deleteContestant, [id]);
+}
 module.exports = {
     db,
     closeDB,
     createTable,
+    initializeDatabase,
     getParticipant,
     enterNewParticipant,
     updateContestant,
-    initializeDatabase
+    deleteContestant
 };

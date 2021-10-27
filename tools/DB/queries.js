@@ -29,9 +29,13 @@ const getSelectContestant = `Select id, name, costume_title as "costumeTitle", c
 
 const enterNewParticipant = `Insert into contestants (id, name, costume_title, costume_img_url, city, country, votes) values ($1, $2, $3, $4, $5, $6, $7) returning id, name, costume_title as "costumeTitle", costume_img_url as "costumeImgUrl", city, country, votes;`;
 
+const deleteContestant = `Update contestants set enabled = false where id = $1 and enabled = true;`;
+
+
 module.exports = {
     createTable,
     getAllContestants,
     getSelectContestant,
-    enterNewParticipant
+    enterNewParticipant,
+	deleteContestant
 };

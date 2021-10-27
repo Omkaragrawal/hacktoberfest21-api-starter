@@ -43,7 +43,7 @@ router.get('/:id', validationSchemas.getContestantViaId, validationSchemas.globa
   try {
     const { rows, rowCount } = await database.getParticipant(req.params.id);
     if(rowCount === 0) {
-      res.status(404).send({
+      return res.status(404).send({
         status: "error",
         message: "Contestant not found"
       });
@@ -51,6 +51,27 @@ router.get('/:id', validationSchemas.getContestantViaId, validationSchemas.globa
       throw new Error("Error retrieving the row:\n" + JSON.stringify({rows, rowCount}));
     }
     res.send(rows[0]);
+} catch(err) {
+  res.status(500).send({
+    status: "Error",
+    message: err
+  });
+}
+
+});
+
+router.delete('/:id', validationSchemas.getContestantViaId, validationSchemas.globalValidator, async (req, res) => {
+  try {
+    const { rows, rowCount } = await database.deleteContestant(req.params.id);
+    if(rowCount === 0) {
+      return res.status(404).send({
+        status: "error",
+        message: "Contestant not found"
+      });
+    } else if(rowCount !== 1) {
+      throw new Error("Error deleting the row:\n" + JSON.stringify({rows, rowCount}));
+    }
+    res.send({status: "ok"});
 } catch(err) {
   res.status(500).send({
     status: "Error",
