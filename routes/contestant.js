@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
     res.json(rows);
     
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.sendStatus(500).send({
       status: error,
       message: error.message
