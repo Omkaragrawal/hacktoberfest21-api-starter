@@ -1,4 +1,4 @@
-const { customAlphabet } = require('nanoid/async');
+const { customAlphabet } = require('nanoid');
 const { urlAlphabet } = require('nanoid');
 
 const getRandomUserId = () => customAlphabet(urlAlphabet, 8);

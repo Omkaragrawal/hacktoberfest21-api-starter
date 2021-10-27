@@ -1,11 +1,22 @@
 var express = require('express');
 var router = express.Router();
+const database = require('../tools/DB/db');
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.json({
+router.get('/', async(req, res) => {
+  try {
+    const { rows } = await database.getParticipant();
+    res.json({
+      items: rows
+    });
     
-  });
+  } catch (error) {
+    res.sendStatus(500).send({
+      status: error,
+      message: error.message
+    });
+  }
+  
 });
 
 router.post('/', (req, res) => {
