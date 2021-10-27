@@ -44,10 +44,6 @@ const enterNewParticipant = ({
     return db.query(queries.enterNewParticipant, [id, name, costumeTitle, costumeImgUrl, city, country, votes]);
 };
 
-const updateContestant = () => {
-    
-};
-
 const upVoteContestant = async id => {
     if (!!!id) return Promise.reject("Invalid ID");
     return db.query(queries.upVoteContestant, [id]);
