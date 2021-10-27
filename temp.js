@@ -6,9 +6,9 @@ require('dotenv').config();
 //     enterNewParticipant,
 // } = require('./tools/DB/db');
 
-const {
-    upVoteContestant
-} = require('./tools/DB/db');
+// const {
+//     upVoteContestant
+// } = require('./tools/DB/db');
 
 const {
     closeDB
@@ -60,13 +60,17 @@ const {
     // const {
     //     rows
     // } = await enterNewParticipant(user);
-    const {
-        rows
-    } = await upVoteContestant("qwerty");
+    // const {
+        // rows
+    // } = await upVoteContestant("qwerty");
 
-    console.log(rows);
+    // console.log(rows);
 
-    await closeDB();
+    // await closeDB();
+
+    const id = require('./tools/idGenerator');
+
+    console.log(id.getRandomUserId());
 })();
 
 // (async () => await closeDB())();

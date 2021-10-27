@@ -12,9 +12,11 @@ const postRootContestant = checkSchema({
         isString: {
             "errorMessage": "Name should be a string."
         },
-        isAlpha: {
-            "errorMessage": "Name cannot contain anything except for Alphabets and space."
-        },
+        
+        // isAlpha: {
+        //     "errorMessage": "Name cannot contain anything except for Alphabets and space."
+        // },
+
         trim: true,
     },
     "costumeTitle": {
@@ -48,9 +50,9 @@ const postRootContestant = checkSchema({
         isString: {
             "errorMessage": "City should be a string."
         },
-        isAlpha: {
-            "errorMessage": "City cannot contain anything except for Alphabets and space."
-        },
+        // isAlpha: {
+        //     "errorMessage": "City cannot contain anything except for Alphabets and space."
+        // },
         trim: true,
     },
     "country": {
@@ -61,9 +63,9 @@ const postRootContestant = checkSchema({
         isString: {
             "errorMessage": "Country should be a string."
         },
-        isAlpha: {
-            "errorMessage": "Country cannot contain anything except for Alphabets and space."
-        },
+        // isAlpha: {
+        //     "errorMessage": "Country cannot contain anything except for Alphabets and space."
+        // },
         trim: true,
     },
     "votes": {
@@ -86,9 +88,9 @@ const postRootContestant = checkSchema({
         isString: {
             errorMessage: "ID should be a string value."
         },
-        isUUID: {
-            errorMessage: "ID should be a valid UUID"
-        }
+        // isUUID: {
+        //     errorMessage: "ID should be a valid UUID"
+        // }
     }
 });
 
@@ -101,9 +103,9 @@ const getContestantViaId = checkSchema({
         isString: {
             errorMessage: "ID should be a string."
         },
-        isUUID: {
-            errorMessage: "ID should be a UUID."
-        },
+        // isUUID: {
+        //     errorMessage: "ID should be a UUID."
+        // },
         trim: true
     }
 });
@@ -117,9 +119,9 @@ const patchContestantId = checkSchema({
         isString: {
             errorMessage: "ID should be a string."
         },
-        isUUID: {
-            errorMessage: "ID should be a UUID."
-        },
+        // isUUID: {
+        //     errorMessage: "ID should be a UUID."
+        // },
         trim: true
     },
     "name": {
@@ -131,9 +133,9 @@ const patchContestantId = checkSchema({
         isString: {
             "errorMessage": "Name should be a string."
         },
-        isAlpha: {
-            "errorMessage": "Name cannot contain anything except for Alphabets and space."
-        },
+        // isAlpha: {
+        //     "errorMessage": "Name cannot contain anything except for Alphabets and space."
+        // },
         trim: true,
     },
     "costumeTitle": {
@@ -170,9 +172,9 @@ const patchContestantId = checkSchema({
         isString: {
             "errorMessage": "City should be a string."
         },
-        isAlpha: {
-            "errorMessage": "City cannot contain anything except for Alphabets and space."
-        },
+        // isAlpha: {
+        //     "errorMessage": "City cannot contain anything except for Alphabets and space."
+        // },
         trim: true,
     },
     "country": {
@@ -184,9 +186,9 @@ const patchContestantId = checkSchema({
         isString: {
             "errorMessage": "Country should be a string."
         },
-        isAlpha: {
-            "errorMessage": "Country cannot contain anything except for Alphabets and space."
-        },
+        // isAlpha: {
+        //     "errorMessage": "Country cannot contain anything except for Alphabets and space."
+        // },
         trim: true,
     }
 });

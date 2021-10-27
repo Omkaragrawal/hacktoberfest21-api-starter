@@ -7,11 +7,10 @@ const validationSchemas = require('../tools/validationSchemas');
 router.get('/', async(req, res) => {
   try {
     const { rows } = await database.getParticipant();
-    res.json({
-      items: rows
-    });
+    res.json(rows);
     
   } catch (error) {
+    console.log(err);
     res.sendStatus(500).send({
       status: error,
       message: error.message
@@ -22,7 +21,7 @@ router.get('/', async(req, res) => {
 
 router.post('/', validationSchemas.postRootContestant, validationSchemas.globalValidator, async (req, res) => {
   try {
-  const { rows, rowCount } = database.enterNewParticipant(req.body);
+  const { rows, rowCount } = await database.enterNewParticipant(req.body);
   if(rowCount !== 1) {
     throw new Error("Error entering the row:\n" + JSON.stringify({rows, rowCount}));
   }
@@ -32,6 +31,7 @@ router.post('/', validationSchemas.postRootContestant, validationSchemas.globalV
   });
 
   } catch(err) {
+    console.log(err);
     res.status(500).send({
       status: "Error",
       message: err
@@ -106,13 +106,13 @@ router.patch('/:id/upvote', validationSchemas.getContestantViaId, validationSche
 });
 router.patch('/:id', validationSchemas.patchContestantId, validationSchemas.globalValidator, async(req, res) => {
   try {
-  const { name, costumeTitle, costumeImgUrl, city, country } = req.body;
-  if(!name && !costumeTitle && !costumeImgUrl && !city && !country){
-    return res.status(400).send({
-      status: "error",
-      message: "Please submit at least one field to be updated"
-    });
-  }
+  const { name = undefined, costumeTitle = undefined, costumeImgUrl = undefined, city = undefined, country = undefined } = req.body;
+  // if(!name && !costumeTitle && !costumeImgUrl && !city && !country){
+  //   return res.status(400).send({
+  //     status: "error",
+  //     message: "Please submit at least one field to be updated"
+  //   });
+  // }
   const { rows, rowCount } = await database.updateContestant({id: req.params.id, name, costumeTitle, costumeImgUrl, city, country});
   if(rowCount === 0) {
     return res.status(404).send({
@@ -127,6 +127,7 @@ router.patch('/:id', validationSchemas.patchContestantId, validationSchemas.glob
     contestantDetails: rows[0]
   });
 } catch(err) {
+  console.log(err);
 res.status(500).send({
   status: "Error",
   message: err

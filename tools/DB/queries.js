@@ -34,7 +34,7 @@ const deleteContestant = `Update contestants set enabled = false where id = $1 a
 const upVoteContestant = `Update contestants set votes = votes + 1 where id = $1 and enabled = true returning votes;`;
 
 const UpdateContestant = {
-	"queryStart": "Update contestants set ",
+	"queryStart": "Update contestants set enabled = true,",
 	"queryEnd": " where id = $1 and enabled = true;",
 	"name": "name = ", 
 	"costumeTitle": "costume_title = ", 
