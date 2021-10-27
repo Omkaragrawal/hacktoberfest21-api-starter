@@ -42,7 +42,12 @@ router.post('/', validationSchemas.postRootContestant, validationSchemas.globalV
 router.get('/:id', validationSchemas.getContestantViaId, validationSchemas.globalValidator, async (req, res) => {
   try {
     const { rows, rowCount } = await database.getParticipant(req.params.id);
-    if(rowCount !== 1) {
+    if(rowCount === 0) {
+      res.status(404).send({
+        status: "error",
+        message: "Contestant not found"
+      });
+    } else if(rowCount !== 1) {
       throw new Error("Error retrieving the row:\n" + JSON.stringify({rows, rowCount}));
     }
     res.send(rows[0]);
